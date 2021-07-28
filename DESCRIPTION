@@ -1,7 +1,7 @@
 Package: fdaPOIFD
 Type: Package
 Title: Partially Observed Integrated Functional Depth
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: c(person("Antonio", "Elías", email = "antonioefz91@gmail.com", role = c("aut", "cre")),
             person("Raúl", "Jiménez", email = "", role = c("ctb")),
             person("Anna M.", "Paganoni", email = "", role = c("ctb")),
@@ -13,15 +13,17 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
 Depends: R (>= 3.5.0)
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
 Imports: ggplot2, tibble, magrittr, reshape2, patchwork, MASS, fdapace,
         FastGP, stats
 URL: https://github.com/aefdz/fdaPOIFD
 BugReports: https://github.com/aefdz/fdaPOIFD
 NeedsCompilation: no
-Packaged: 2021-01-08 16:56:50 UTC; anton
+Packaged: 2021-07-28 09:50:53 UTC; anton
 Author: Antonio Elías [aut, cre],
   Raúl Jiménez [ctb],
   Anna M. Paganoni [ctb],
   Laura M. Sangalli [ctb]
 Repository: CRAN
-Date/Publication: 2021-01-13 12:00:02 UTC
+Date/Publication: 2021-07-28 10:10:09 UTC

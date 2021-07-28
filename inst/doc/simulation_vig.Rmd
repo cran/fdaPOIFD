@@ -1,0 +1,59 @@
+---
+title: "Illustration of the simulations"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Illustration of the simulations}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+## Load packages
+```{r}
+library("fdaPOIFD")
+```
+
+## Generate data
+
+```{r}
+N <- 100
+P <- 200
+dataPOFD <- gaussian_PoFD(n=N, p=P, type = "common", observability = 0.2)
+```
+
+## Depth computations
+
+### Depth on fully observed data
+```{r}
+depth_complete <- POIFD(dataPOFD$fd, type = "MBD")
+```
+Notice that the function POIFD on fully observed data coincides with the unweighted IFD.
+
+### POIFD 
+```{r}
+depth_POIFD <- POIFD(dataPOFD$pofd, type = "MBD")
+```
+
+### Depth with reconstructed curves by Goldsmith (2013)
+Install and load the Rpackage *refund*.
+
+```{r}
+library("refund")
+
+Fit.IV <- ccb.fpc(t(dataPOFD$pofd), n.boot = 10)
+
+goldsmith_reconstruction <- t(Fit.IV$Yhat)
+depth_goldsmith <- POIFD(goldsmith_reconstruction, type = "MBD")
+```
+
+Notice that the function POIFD on reconstructed data coincides with the unweighted IFD.
+
+### Depth with reconstructed curves by Kraus (2015)
+Kraus (2015) was implemented using the function *pred.missfd* obtained from the code at [https://is.muni.cz/www/david.kraus/web_files/papers/partial_fda_code.zip](https://is.muni.cz/www/david.kraus/web_files/papers/partial_fda_code.zip).
+
+### Depth with reconstructed curves by Liebl (2020)
+
+Liebl (2020) was implemented using the function *reconstructKneipLiebl* obtained from the code at [https://github.com/lidom/ReconstPoFD](https://github.com/lidom/ReconstPoFD)
