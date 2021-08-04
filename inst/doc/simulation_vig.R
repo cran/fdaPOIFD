@@ -3,11 +3,49 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 
 ## -----------------------------------------------------------------------------
 #  library("fdaPOIFD")
+#  
+#  # auxiliary functions to generate Gaussian processes
+#  Cov_exponential <- function(X1, X2, alpha = NULL, beta = NULL){
+#    x.aux <- expand.grid(i = X1, j = X2)
+#  
+#    cov <- alpha*exp(-beta*abs(x.aux$i - x.aux$j))
+#  
+#    Sigma <- matrix(cov, nrow = length(X1))
+#    return(Sigma)
+#  }
+#  
+#  Cov_Periodic <- function(X1, X2, sigma = NULL, p = NULL, l = NULL) {
+#    #p = period, l = wiggles, sigma = noise
+#    Sigma <- matrix(rep(0, length(X1)*length(X2)), nrow=length(X1))
+#    for (i in 1:nrow(Sigma)) {
+#      for (j in 1:ncol(Sigma)) {
+#        Sigma[i,j] <- sigma*exp(-(2*(sin(pi*abs(X1[i]-X2[j])/(p)))^2)/(l^2))
+#      }
+#    }
+#    return(Sigma)
+#  }
+#  
 
 ## -----------------------------------------------------------------------------
-#  N <- 100
-#  P <- 200
-#  dataPOFD <- gaussian_PoFD(n=N, p=P, type = "common", observability = 0.2)
+#  n <- 100
+#  p <- 200
+#  
+#  #parameters
+#  time_grid <- seq(0, 1, length.out = p)
+#  sigmaPeriodic <- Cov_Periodic(time_grid, time_grid, sigma = 3, p = 1 , l = 0.5)
+#  sigmaExpo <- Cov_exponential(time_grid, time_grid, alpha = 0.5, beta = 5)
+#  
+#  # Generate the random mean
+#  centerline <- MASS::mvrnorm(1, rep(0, p), sigmaPeriodic)
+#  
+#  # Generate the random sample
+#  dataY <- FastGP::rcpp_rmvnorm(n, sigmaExpo, centerline)
+#  data <- t(dataY)
+#  colnames(data) <- as.character(c(1:n))
+#  rownames(data) <- round(time_grid, digits=5)
+#  
+#  
+#  dataPOFD <- intervalPOFD(data, observability = 0.5, ninterval = 4, pIncomplete = 0.75)
 
 ## -----------------------------------------------------------------------------
 #  depth_complete <- POIFD(dataPOFD$fd, type = "MBD")
@@ -18,7 +56,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ## -----------------------------------------------------------------------------
 #  library("refund")
 #  
-#  Fit.IV <- ccb.fpc(t(dataPOFD$pofd), n.boot = 10)
+#  Fit.IV <- ccb.fpc(t(dataPOFD$pofd))
 #  
 #  goldsmith_reconstruction <- t(Fit.IV$Yhat)
 #  depth_goldsmith <- POIFD(goldsmith_reconstruction, type = "MBD")
