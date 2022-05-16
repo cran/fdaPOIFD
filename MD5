@@ -1,6 +1,6 @@
-c1897d35ff8d9a70237380874908395f *DESCRIPTION
+e5076ad8c839c94e3f9ce13e95f41c26 *DESCRIPTION
 47cb11ea9a09311c896046139683d473 *NAMESPACE
-9e59178c9fc52dca31c56309ae7bdb18 *NEWS.md
+f0e4c77a656a62b0ffa2f5923276f67f *NEWS.md
 1df56404167d64cd5fc7ee4cfc477a60 *R/POIFD.R
 3a5e1a437f84e1a7171988e38356c51b *R/boxplotPoFD.R
 38cacbc13e6833b7d0c3bd8d260a824d *R/commondomainPOFD.R
@@ -11,6 +11,7 @@ d556109ae58951476d07e2ca33c2a8a1 *R/intervalPOFD.R
 1ac1e36ffafebbc6bccba0d2259f3b9f *R/sparsePOFD.R
 f1f20b8c325e440c94fc08dbbb4cdb3b *build/vignette.rds
 b1b0fe292656711da72894f5e182e056 *data/exampleData.RData
+5270d3d837552b2c202f6813cda3cd6a *inst/CITATION
 5b29c8157bd10e36f1e364015afad72a *inst/doc/simulation_vig.R
 5a23ac1b490e3548047de4bf6efd06ee *inst/doc/simulation_vig.Rmd
 65c0f196b40ad5557a73b36c761d243c *inst/doc/simulation_vig.html
